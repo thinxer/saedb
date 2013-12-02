@@ -1,11 +1,12 @@
 // Simple edge counting program
-#include <iostream>
-#include <random>
 #include <algorithm>
+#include <atomic>
+#include <cmath>
+#include <iostream>
 #include <map>
 #include <queue>
+#include <random>
 #include <set>
-#include <atomic>
 
 #include "gflags/gflags.h"
 #include "streaming/streaming.hpp"
@@ -86,7 +87,7 @@ struct SCAN {
         for (auto& n : neighbors) {
             double dot = sparse_dot(neighbors, context.vertices[n.first].neighbors);
             double sim = dot / (l2_weights * context.vertices[n.first].l2_weights);
-            if (isnan(sim))
+            if (std::isnan(sim))
                 sim = 0;
             sims.emplace(n.first, sim);
         }
